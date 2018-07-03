@@ -4,7 +4,9 @@ injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Abel|Lato');
 
   $cor-background-padrao: #f3f3f3;
+  $cor-cinza: #ccc;
   $cor-branca: #fff;
+
   * {
     margin:0;
     padding:0;

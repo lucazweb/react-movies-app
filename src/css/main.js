@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+const CorAzulPadrao = "#266092";
+const CorAzulClaro = "#48e8e5";
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -40,6 +43,7 @@ export const SearchForm = styled.div`
 `;
 
 export const MoviesBox = styled.div`
+    
     display:flex;
     flex-direction:column;
     align-items: center;
@@ -51,8 +55,12 @@ export const MoviesBox = styled.div`
         display:flex;
         flex-direction:row;
         align-items:left;
+        margin-bottom:20px;
         .thumb{
             width:50%;
+            @media only screen and (min-device-width : 320px) and (max-device-width : 767px) { 
+                display:none;
+            }
             img{
                 width:100%;
             }
@@ -93,30 +101,32 @@ export const MoviesBox = styled.div`
                 padding: 50px 12px 12px 12px;
             }
 
-            .tags{
-                display:flex;
-                margin-left:12px;
-                width:70%;
-                .tag{
-                    padding:4px 8px;
-                    border-radius: 20px;
-                    border:1px solid #266092;
-                    color: #266092;
-                    background: #fff;
-                    font-size: 0.8em;
-                    margin-right: 6px;
-                }
-                
-            }
+
         }
     }
 
 `;
 
+export const Tags = styled.div`
+    display:flex;
+    margin-left:12px;
+    width:70%;
+    .tag{
+        padding:4px 8px;
+        border-radius: 20px;
+        border:1px solid #266092;
+        color: #266092;
+        background: #fff;
+        font-size: 0.8em;
+        margin-right: 6px;
+    }
+`;
+
+
 export const Pagination = styled.div`
     display:flex;
     justify-content: space-between;
-    margin-top:30px;
+    margin:30px auto 30px auto;
     width: 200px;
     .page{
         color: #266092;
@@ -139,4 +149,80 @@ export const Pagination = styled.div`
 `;
 
 
+export const MovieDetail = styled.div`
+    display:flex;
+    width:80%;
+    flex-direction: column; 
+    .detail-header{
+        display:flex;
+        width:100%;
+        height: 70px;
+        padding:20px;
+        background: #e2e2e2;
+        justify-content:space-between;
+        
+        .movie-title{
+            font-size: 2em;
+            color: ${CorAzulPadrao}
+            
+        }
+    }
 
+    .detail-body{
+        display:flex;
+        
+        .infos{
+            display:flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 12px;
+            background: #f3f3f3;
+
+            .detail-info{               
+                width:100%;
+                margin-bottom:20px;
+                h3{
+                    color: ${CorAzulPadrao};
+                    border-bottom: 1px solid ${CorAzulPadrao};
+                    margin-bottom: 14px;
+                    padding-bottom:12px;
+                }
+         
+            }
+
+            .topics{
+                display:flex;
+                flex-direction: column;
+                .info-topics{
+                    display:flex;
+                    justify-content: space-between;
+                    .info{
+                        display:flex;
+                        flex-direction:column;
+                        width: 20%;
+                        h4{
+                            color: ${CorAzulPadrao}
+                        }
+                    }                    
+                }
+            }
+
+        }
+
+        .rating{
+            width: 82px;
+            font-size: 1.7em;
+            display:flex;
+            background: #266092;
+            border: 2px solid #266092;
+            box-shadow: 0 0 0 3px ${CorAzulClaro} inset;
+            border-radius: 40px;
+            padding: 24px 12px;
+            text-align:center;
+            margin:20px;
+            
+        }
+
+    }
+
+`;

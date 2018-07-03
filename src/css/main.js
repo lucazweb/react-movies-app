@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 const CorAzulPadrao = "#266092";
 const CorAzulClaro = "#48e8e5";
+const CorAzulHover = "#0e2d48";
+const CorPretaPadrao = "#333";
+const CorCinza = "#e2e2e2";
+const CorCinzaSecundaria = "#f3f3f3";
+const CorBranca = "#fff";
 
 export const Container = styled.div`
     display: flex;
@@ -16,7 +21,7 @@ export const Container = styled.div`
         justify-content: center;
         align-items: center;
         background: #069;
-        color: #fff;
+        color: ${CorAzulClaro};
     }
 `;
 
@@ -58,7 +63,7 @@ export const MoviesBox = styled.div`
         margin-bottom:20px;
         .thumb{
             width:50%;
-            @media only screen and (min-device-width : 320px) and (max-device-width : 767px) { 
+            @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) { 
                 display:none;
             }
             img{
@@ -74,14 +79,14 @@ export const MoviesBox = styled.div`
                 width:100%;
                 height:70px;
                 padding: 10px 10px 10px 80px;
-                color: #48e8e5;
-                background: #266092;
+                color: ${CorAzulClaro};
+                background: ${CorAzulPadrao};
 
                 .rating{
                     position: absolute;
-                    background: #266092;
-                    border: 2px solid #266092;
-                    box-shadow: 0 0 0 3px #48e8e5 inset;
+                    background: ${CorAzulPadrao};
+                    border: 2px solid ${CorAzulPadrao};
+                    box-shadow: 0 0 0 3px ${CorAzulClaro} inset;
                     border-radius: 40px;
                     padding: 20px 12px;
                     text-align:center; 
@@ -112,13 +117,17 @@ export const Tags = styled.div`
     margin-left:12px;
     width:70%;
     .tag{
+        cursor: pointer;
         padding:4px 8px;
         border-radius: 20px;
-        border:1px solid #266092;
-        color: #266092;
-        background: #fff;
+        border:1px solid ${CorAzulPadrao};
+        color: ${CorAzulPadrao};
+        background: ${CorBranca};
         font-size: 0.8em;
         margin-right: 6px;
+        &:hover{
+            color: ${CorAzulHover};
+        }
     }
 `;
 
@@ -129,22 +138,22 @@ export const Pagination = styled.div`
     margin:30px auto 30px auto;
     width: 200px;
     .page{
-        color: #266092;
+        color: ${CorAzulPadrao};
         padding: 12px 16px;
         cursor: pointer;
         transition: all ease 0.3s;
         &:hover{
-            color: #039;
+            color: ${CorAzulHover};
         }
     }
     .page.active{
-        border: 2px solid #266092;
-        box-shadow: 0 0 0 3px #48e8e5 inset;
+        border: 2px solid ${CorAzulPadrao};
+        box-shadow: 0 0 0 3px ${CorAzulClaro} inset;
         border-radius: 40px;
         padding: 12px 16px; 
         text-align:center; 
         color: white; 
-        background: #266092;       
+        background: ${CorAzulPadrao};       
     }
 `;
 
@@ -158,26 +167,33 @@ export const MovieDetail = styled.div`
         width:100%;
         height: 70px;
         padding:20px;
-        background: #e2e2e2;
+        background: ${CorCinza};
         justify-content:space-between;
         
         .movie-title{
             font-size: 2em;
             color: ${CorAzulPadrao}
-            
+        }
+
+        .date{
+            color: ${CorPretaPadrao};
         }
     }
 
     .detail-body{
         display:flex;
-        
+        @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+            flex-direction: column-reverse;
+        }
         .infos{
             display:flex;
             flex-direction: column;
-            width: 100%;
+            width: 70%;
             padding: 12px;
-            background: #f3f3f3;
-
+            background: ${CorCinzaSecundaria};
+            @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+                width: 100%;
+            }
             .detail-info{               
                 width:100%;
                 margin-bottom:20px;
@@ -186,6 +202,10 @@ export const MovieDetail = styled.div`
                     border-bottom: 1px solid ${CorAzulPadrao};
                     margin-bottom: 14px;
                     padding-bottom:12px;
+                }
+                p{
+                    color: ${CorPretaPadrao};
+                    line-height: 17pt;
                 }
          
             }
@@ -196,12 +216,28 @@ export const MovieDetail = styled.div`
                 .info-topics{
                     display:flex;
                     justify-content: space-between;
+                    @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+                        flex-direction: column;
+                        justify-content: left !important;
+                        align-content: center;
+                    }                    
                     .info{
                         display:flex;
                         flex-direction:column;
                         width: 20%;
+                        text-align:center;
+                        @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+                            width: 100%;
+                            margin-bottom:10px;
+                            justify-content: center;
+                            align-items: center;
+                        }                        
                         h4{
                             color: ${CorAzulPadrao}
+                            padding-bottom:14px;
+                            @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+                                border-bottom: 1px dotted ${CorAzulPadrao};
+                            }
                         }
                     }                    
                 }
@@ -209,20 +245,42 @@ export const MovieDetail = styled.div`
 
         }
 
-        .rating{
-            width: 82px;
-            font-size: 1.7em;
-            display:flex;
-            background: #266092;
-            border: 2px solid #266092;
-            box-shadow: 0 0 0 3px ${CorAzulClaro} inset;
-            border-radius: 40px;
-            padding: 24px 12px;
-            text-align:center;
-            margin:20px;
-            
+        .detail-image{
+            width:30%;
+            @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+                width:100%;
+            }
+            img{
+                width:100%;
+            }
         }
-
     }
 
+`;
+
+export const RatingBox = styled.div`
+    display:flex;
+    width:100%;
+    flex-direction: row-reverse;
+
+    .rating{
+        width: 82px;
+        font-size: 1.7em;
+        display:flex;
+        color: ${CorAzulClaro};
+        background: #266092;
+        border: 2px solid #266092;
+        box-shadow: 0 0 0 3px ${CorAzulClaro} inset;
+        border-radius: 80px;
+        padding: 24px 12px;
+        text-align:center;
+        margin:20px;
+        transition: all ease 0.4s;
+        cursor:pointer;
+        
+        &:hover{
+            background: ${CorAzulHover};
+        }
+        
+    }
 `;

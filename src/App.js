@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/global';
-import { Container, SearchForm, MoviesBox, Tags, Pagination, MovieDetail } from './css/main';
+import { Container, SearchForm, MoviesBox, Tags, Pagination, MovieDetail, RatingBox } from './css/main';
 
 export default class App extends Component{
   constructor(){
@@ -84,27 +84,27 @@ export default class App extends Component{
                   </div>
                   
                   <div className="info"> 
-                    <h4> Situação </h4>
+                    <h4> Idioma </h4>
                     <p> Lançado </p>
                   </div>
 
                   <div className="info"> 
-                    <h4> Situação </h4>
+                    <h4> Duração </h4>
                     <p> Lançado </p>
                   </div>
 
                   <div className="info"> 
-                    <h4> Situação </h4>
+                    <h4> Orçamento </h4>
                     <p> Lançado </p>
                   </div>
 
                   <div className="info"> 
-                    <h4> Situação </h4>
+                    <h4> Receita </h4>
                     <p> Lançado </p>
                   </div>
 
                   <div className="info"> 
-                    <h4> Situação </h4>
+                    <h4> Lucro </h4>
                     <p> Lançado </p>
                   </div>                
                 </div>
@@ -117,7 +117,9 @@ export default class App extends Component{
                   <div className="tag">Fantasia</div>
                 </Tags>  
 
-            <div className="rating"> 87%</div>                
+            <RatingBox>
+              <div className="rating"> 87%</div>                
+            </RatingBox>
 
             </div>
    

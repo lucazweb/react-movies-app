@@ -160,7 +160,7 @@ export const Pagination = styled.div`
 
 export const MovieDetail = styled.div`
     display:flex;
-    width:80%;
+    width:100%;
     flex-direction: column; 
     .detail-header{
         display:flex;

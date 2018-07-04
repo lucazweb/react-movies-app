@@ -1,23 +1,35 @@
-import React from 'react';
-import { MoviesBox, MovieDetail, Tags, RatingBox } from '../css/main';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { MoviesBox, Tags } from '../css/main';
+import imgBaseUrl from '../services/imgBaseUrl';
 
-const MovieBox = () => (
+const FormatDate = (string) => {
+    return string.split('-').reverse().join('/');
+}
+
+const VoteAverage = (vote_average) => {
+    return vote_average * 10
+}
+
+const MovieBox = ({movie, genres}) => (
     <MoviesBox>
         <div className="movie"> 
-        <div className="thumb"> <img src="https://is2-ssl.mzstatic.com/image/thumb/Video118/v4/7a/42/91/7a429166-3c7f-9a98-bd13-e1f74c0f01e3/source/1200x630bb.jpg" alt="" /></div>
-        <div className="movie-info">
-            <div className="movie-header"> 
-            <h2>Thor: Ragnarok</h2>
-            <div className="rating"> 75%</div>
-            <span className="date">25/10/2017</span>
+            <div className="thumb"> <Link to={`/movie/${movie.id}`}><img src={`http://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt="" /> </Link></div>
+            <div className="movie-info">
+                <div className="movie-header"> 
+                <h2>{movie.title}</h2>
+                <div className="rating"> {VoteAverage(movie.vote_average)}%</div>
+                <span className="date">{FormatDate(movie.release_date)}</span>
+                </div>
+                <div className="movie-synopsis"> {movie.overview} </div>
+                <Tags> 
+                    {
+                        genres.map(genre => (
+                            <div key={genre.id} className="tag">{genre.name}</div>
+                        ))
+                    }
+                </Tags>
             </div>
-            <div className="movie-synopsis"> Thor (Chris Hemsworth) está preso do outro lado do universo. Ele precisa correr contra o tempo para voltar a Asgard e parar Ragnarok, a destruição de seu mundo, que está nas mãos da poderosa e implacável vilã Hela (Cate Blanchett). </div>
-            <Tags> 
-            <div className="tag">Ação</div>
-            <div className="tag">Aventura</div>
-            <div className="tag">Fantasia</div>
-            </Tags>
-        </div>
         </div>
     </MoviesBox>
 );

@@ -62,15 +62,20 @@ export const MoviesBox = styled.div`
         align-items:left;
         margin-bottom:20px;
         .thumb{
-            width:50%;
+            width:20%;
             @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) { 
                 display:none;
             }
             img{
                 width:100%;
+                transition: all ease 0.3s;
+                &:hover{
+                    opacity: 0.6;
+                }
             }
         }
         .movie-info{
+            width: 80%;
             background: #f3f3f3;
             .movie-header{
                 position:relative;

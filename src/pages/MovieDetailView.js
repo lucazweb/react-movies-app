@@ -1,24 +1,44 @@
 import React, { Component } from 'react';
-import { Container, SearchForm, Tags, Pagination, MovieDetail, RatingBox } from '../css/main';
+import api from '../services/api';
+import apiKey from '../services/key';
+import {Tags, MovieDetail, RatingBox } from '../css/main';
 
 export default class MovieDetailView extends Component{
     constructor(){
         super();
-        this.state = {};
+        this.state = {
+            movie: {}
+        };
     }
-    
+
+    componentDidMount(){
+        this.handleMovie();
+    }
+
+    handleMovie = async () => {
+        try{
+            const response = await api.get(`/movie/${this.props.match.params.id}?${apiKey}`)
+            this.setState({movie: response.data});
+            console.log(response.data);
+        } catch(err){
+            console.log(err);
+        } finally{
+            // loading state off
+        }
+    }
+
     render(){
         return(
             <MovieDetail> 
                 <div className="detail-header"> 
-                <h2 className="movie-title"> Thor: Ragnarok </h2>
+                <h2 className="movie-title"> {this.state.movie.title} </h2>
                 <div className="date">25/10/2017</div>
                 </div>
                 <div className="detail-body"> 
                 <div className="infos">
                     <div className="detail-info">
                     <h3> Sinopse </h3>
-                    <p>Thor (Chris Hemsworth) está preso do outro lado do universo. Ele precisa correr contra o tempo para voltar a Asgard e parar Ragnarok, a destruição de seu mundo, que está nas mãos da poderosa e implacável vilã Hela (Cate Blanchett). </p>
+                    <p>{this.state.movie.overview} </p>
                     </div>          
     
                     <div className="detail-info topics">
@@ -60,17 +80,15 @@ export default class MovieDetailView extends Component{
     
                     <Tags> 
                         <div className="tag">Ação</div>
-                        <div className="tag">Aventura</div>
-                        <div className="tag">Fantasia</div>
                     </Tags>  
     
                     <RatingBox>
-                        <div className="rating"> 87%</div>                
+                        <div className="rating"> {this.state.movie.vote_average * 10}%</div>                
                     </RatingBox>
 
                 </div>
                     <div className="detail-image"> 
-                    <img src="https://is2-ssl.mzstatic.com/image/thumb/Video118/v4/7a/42/91/7a429166-3c7f-9a98-bd13-e1f74c0f01e3/source/1200x630bb.jpg" alt="" />
+                    <img src={`http://image.tmdb.org/t/p/w342/${this.state.movie.poster_path}`} alt="" />
                     </div>                 
                 </div>
                 <div className="detail-trailer"> </div>

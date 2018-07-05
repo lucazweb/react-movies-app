@@ -1,4 +1,4 @@
-# React Movie App
+# React Movies App
 ### Instalação
 
 Necessária a instalação do NodeJS v4+ (https://nodejs.org/) / npm ou Yarn para rodar.

@@ -289,3 +289,10 @@ export const RatingBox = styled.div`
         
     }
 `;
+
+export const MensagemBusca = styled.div`
+    margin-top:50px;
+    text-align: center;
+    font-size: 2.5em;
+    color: ${CorCinza};
+`;

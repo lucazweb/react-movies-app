@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Container, SearchForm, Tags, Pagination, MovieDetail, RatingBox } from '../css/main';
+import { Container, SearchForm, Tags, Pagination, MovieDetail, RatingBox, MensagemBusca } from '../css/main';
 import MovieBox from '../components/MovieBox';
 import api from '../services/api';
 import apiKey from '../services/key';
@@ -9,8 +9,12 @@ export default class Home extends Component {
     constructor(){
         super();
         this.state = {
+            keyword: '',
+            loading: false,
             movies: [],
-            genres: []
+            genres: [],
+            currentPage: 1,
+            totalPages: 0
         };
     }
     
@@ -22,27 +26,39 @@ export default class Home extends Component {
         this.handleGenres();
     }
 
-    handleQuery =  async (keyword) => {
+    handleQuery =  async (keyword, page = 1) => {
+        this.setState({keyword: keyword});
         try{
-            const response = await api.get(`/search/movie?query=${keyword}&${apiKey}&page=1`);
+            this.setState({loading: true})
+            const response = await api.get(`/search/movie?query=${keyword}&${apiKey}&language=pt-BR&page=${page}`);
             console.log(response.data);
-            this.setState({movies: response.data.results})
+            this.setState({movies: response.data.results, totalPages: response.data.total_pages});
         }catch(err){
             console.log(err);
         } finally{
+            this.setState({loading: false})
+        }
+    }
 
+    handlePagination = async (page) => {
+        try{
+            const response = await api.get(`/search/movie?query=${this.state.keyword}&${apiKey}&language=pt-BR&page=${page}`);
+            this.setState({movies: response.data.results});
+        }catch(err){
+            console.log(err);
         }
     }
 
     handleGenres = async (id) => {
         try {
-            const response = await api.get(`/genre/movie/list?${apiKey}`);
-            console.log(response);
+            const response = await api.get(`/genre/movie/list?${apiKey}&language=pt-BR&page=${this.state.currentPage}`);
             this.setState({genres: response.data.genres});
         } catch(err){
             console.log(err);
         }
     }
+
+ 
 
     getMovieGenres = (genre_ids) => {
         const movieGenres = [];
@@ -56,6 +72,7 @@ export default class Home extends Component {
 
         return movieGenres;
     }
+    
 
     render(){
         return(
@@ -64,9 +81,17 @@ export default class Home extends Component {
                 <SearchForm> 
                     <input onChange={e => this.handleQuery(e.target.value)} className="search" placeholder="Busque um filme por nome, ano ou gênero..." />
                 </SearchForm>
+
+                {
+                    this.state.movies.length === 0 && <MensagemBusca> Sem resultados a exibir :| </MensagemBusca>
+                }
+
+                {
+                    this.state.loading && <MensagemBusca> Carregando.. </MensagemBusca>
+                }
+
                 {
                     this.state.movies.length > 0 && 
-                    
                     <Fragment> 
                         {
                             this.state.movies.map(movie => (
@@ -77,13 +102,18 @@ export default class Home extends Component {
                 }
                 
 
-                <Pagination> 
-                    <div className="page">1</div>
-                    <div className="page">2</div>
-                    <div className="page active">3</div>
-                    <div className="page">4</div>
-                    <div className="page">5</div>
-                </Pagination>
+                
+                {
+                    this.state.movies.length > 0 ?
+                        <Pagination> 
+                            <div onClick={() => this.handlePagination(2)} className="page">2</div>
+                        </Pagination> : ''
+                                            
+                }
+                    
+                    
+                    
+                
             </Fragment>            
         );
     }

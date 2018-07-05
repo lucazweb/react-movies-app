@@ -4,6 +4,7 @@ import MovieBox from '../components/MovieBox';
 import api from '../services/api';
 import apiKey from '../services/key';
 
+
 export default class Home extends Component {
 
     constructor(){
@@ -87,7 +88,7 @@ export default class Home extends Component {
                 }
 
                 {
-                    this.state.loading && <MensagemBusca> Carregando.. </MensagemBusca>
+                    this.state.loading && <MensagemBusca> <i className="fa fa-spinner fa-spin fa-3x" aria-hidden="true"></i> </MensagemBusca>
                 }
 
                 {
@@ -106,7 +107,10 @@ export default class Home extends Component {
                 {
                     this.state.movies.length > 0 ?
                         <Pagination> 
+                            <div className="page active">1</div>
                             <div onClick={() => this.handlePagination(2)} className="page">2</div>
+                            <div className="page active">3</div>
+                            <div className="page active">4</div>
                         </Pagination> : ''
                                             
                 }

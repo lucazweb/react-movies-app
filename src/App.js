@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import MovieDetailView from './pages/MovieDetailView';
+import '../node_modules/font-awesome/css/font-awesome.css';
 
 import './css/global';
 import { Container, SearchForm, Tags, Pagination, MovieDetail, RatingBox } from './css/main';
